@@ -1,4 +1,4 @@
-export class TaskService {
+export class QueueService {
 
     constructor(size, limit, renderCallback, textArray) {
         this.size = size;

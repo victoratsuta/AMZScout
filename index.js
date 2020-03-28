@@ -1,4 +1,4 @@
-import {TaskService} from "./TaskService.js";
+import {QueueService} from "./QueueService.js";
 
 const renderCallback = (title, text) => $('#desc').append(`<div class="wrapper"><p class="title">${title}</p><p class="text">${text}</p></div>`);
 
@@ -80,7 +80,7 @@ $(document).ready(function(e){
 
         $('#submit').attr("disabled", true);
 
-        const service = new TaskService(size, limit, renderCallback, textArray);
+        const service = new QueueService(size, limit, renderCallback, textArray);
 
         service.run()
 
