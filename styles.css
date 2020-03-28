@@ -1,0 +1,23 @@
+#form, #desc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#desc{
+    align-items: inherit;
+}
+
+#desc .wrapper{
+    border: 1px solid black;
+    margin: 20px;
+}
+
+#form input{
+    margin: 10px;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+}
