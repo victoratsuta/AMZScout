@@ -1,6 +1,13 @@
 import {QueueService} from "./QueueService.js";
 
-const renderCallback = (title, text) => $('#desc').append(`<div class="wrapper"><p class="title">${title}</p><p class="text">${text}</p></div>`);
+const renderCallback = (title, text) => {
+
+    const target = document.querySelector("#desc");
+    target.innerHTML += `<div class="wrapper"><p class="title">${title}</p><p class="text">${text}</p></div>`;
+
+};
+
+const finalCallback = () => document.getElementById('submit').disabled = false;
 
 const text = "\"Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes. But I warn\n" +
     "you, if you don't tell me that this means war, if you still try to defend the infamies and horrors\n" +
@@ -69,22 +76,16 @@ const text = "\"Well, Prince, so Genoa and Lucca are now just family estates of 
 
 const textArray= text.split('.');
 
-$(document).ready(function(e){
+document.querySelector("#form").addEventListener("submit", function (e) {
 
-    $('#form').on('submit',function(e){
+    e.preventDefault();
 
-        e.preventDefault();
+    const size = document.getElementById('size').value;
+    const limit = document.getElementById('limit').value;
 
-        const size = $('#size').val();
-        const limit = $('#limit').val();
+    document.getElementById('submit').disabled = true;
 
-        $('#submit').attr("disabled", true);
-
-        const service = new QueueService(size, limit, renderCallback, textArray);
-
-        service.run()
-
-        $('#submit').attr("disabled", false);
-    });
+    const service = new QueueService(size, limit, renderCallback, textArray, finalCallback);
+    service.run()
 
 });

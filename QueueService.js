@@ -1,10 +1,11 @@
 export class QueueService {
 
-    constructor(size, limit, renderCallback, textArray) {
+    constructor(size, limit, renderCallback, textArray, finalCallback) {
         this.size = size;
         this.limit = limit;
         this.renderCallback = renderCallback;
         this.textArray = textArray;
+        this.finalCallback = finalCallback;
         this.currentIndex = 0;
         this.randomArray = [];
     }
@@ -36,9 +37,12 @@ export class QueueService {
     async runTask() {
 
         let next = this.randomArray.pop();
-        if (!next) return;
+        if (!next) {
+            this.finalCallback();
+            return
+        }
 
-        this.currentIndex +=1;
+        this.currentIndex += 1;
 
         await this.mapper(next, this.currentIndex);
         await this.runTask();
